@@ -23,9 +23,9 @@
  * EVENT_DEVICE_NAME
  * 
  */
-import { NativeModules, DeviceEventEmitter } from 'react-native';
+import { NativeModules, DeviceEventEmitter, Platform } from 'react-native';
 
-const EasyBluetooth = NativeModules.EasyBluetoothClassic;
+const EasyBluetooth = Platform.OS === 'android' ? NativeModules.EasyBluetoothClassic : {};
 
 EasyBluetooth.addOnDeviceFoundListener = function (eventCallback) {
     return DeviceEventEmitter.addListener(EasyBluetooth.EVENT_DEVICE_FOUND, eventCallback);
